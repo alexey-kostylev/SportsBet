@@ -71,7 +71,10 @@ public record Sport(string name, HashSet<Position> SupportedPositions)
             throw new InvalidOperationException($"Player '{player.Name}' does not exist in position '{position}'.");
         }
 
-        players.Remove(player);
+        if (!players.Remove(player))
+        {
+            throw new InvalidOperationException($"Player '{player.Name}' does not exist in position '{position}'.");
+        }
     }
 
     /// <summary>

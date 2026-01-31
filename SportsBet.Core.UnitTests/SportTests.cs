@@ -69,6 +69,19 @@ player entered gets priority and bumps the existing player down a depth spot.
         var player1 = new Player(1, "Player 1");
         _sport.AddPlayerToDepthChart(player1, Position.QB, 0);
 
+        Action act = () => _sport.RemovePlayerFromDepthChart(new Player(100, "test"), Position.QB);
+
+        act.Should().Throw<InvalidOperationException>().WithMessage("Player 'test' does not exist in position 'QB'.");
+
+        _sport.GetFullDepthChart()[Position.QB].Should().HaveCount(1);
+    }
+
+    [Fact]
+    public void RemovePlayerFromDepthChart_PositionDoesNotExist_ShouldThrowException()
+    {
+        var player1 = new Player(1, "Player 1");
+        _sport.AddPlayerToDepthChart(player1, Position.QB, 0);
+
         Action act = () => _sport.RemovePlayerFromDepthChart(player1, Position.WR);
 
         act.Should().Throw<InvalidOperationException>().WithMessage("Player 'Player 1' does not exist in position 'WR'.");
