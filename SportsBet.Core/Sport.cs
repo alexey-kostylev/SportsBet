@@ -16,7 +16,7 @@ namespace SportsBet.Core;
 /// <param name="SupportedPositions">A set of positions that are valid for this sport.</param>
 public record Sport(string name, HashSet<Position> SupportedPositions)
 {
-    private readonly Dictionary<Position, IList<Player>> _positionSlots = new() { };
+    private readonly Dictionary<Position, IList<Player>> _positionSlots = [];
 
     /// <summary>
     /// Adds a player to the specified position in the depth chart at the given depth, or at the end if no depth is
