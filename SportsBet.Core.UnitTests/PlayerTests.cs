@@ -32,7 +32,7 @@ public class PlayerTests
     {
         var player = new Player(1, "Player 1");
         player.SetPrimaryPosition(Position.QB);
-        player.Position.Should().Be(Position.QB); // Should remain the first position
+        player.Position.Should().Be(Position.QB);
     }
 
     [Fact]
