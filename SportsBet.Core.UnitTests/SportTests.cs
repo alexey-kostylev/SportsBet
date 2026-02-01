@@ -9,19 +9,29 @@ public class SportTests
         [Position.QB, Position.WR]
         );
 
-    /*
-     *  Adds a
-player to a depth chart for a given position (at a specific spot). If
-no position_depth is provided, then add them to the end of the depth chart
-for that position. If you are entering two players into the same slot, the last
-player entered gets priority and bumps the existing player down a depth spot.
-    */
     [Fact]
     public void AddPlayerToDepthChart_ShouldAddPlayer()
     {
-        _sport.AddPlayerToDepthChart(new Player(1, "Player 1"), Position.QB, 0);
+        var player = new Player(1, "Player 1");
+        _sport.AddPlayerToDepthChart(player, Position.QB, 0);
 
         _sport.GetFullDepthChart()[Position.QB].Should().HaveCount(1);
+
+        player.Position.Should().Be(Position.QB);
+    }
+
+    [Fact]
+    public void AddPlayerToDepthChart_ShouldAddPlayerToSecondaryPosition()
+    {
+        var player = new Player(1, "Player 1");
+        _sport.AddPlayerToDepthChart(player, Position.QB, 0);
+        _sport.AddPlayerToDepthChart(player, Position.WR);
+
+        var depthChart  = _sport.GetFullDepthChart();
+        depthChart[Position.QB].Should().HaveCount(1);
+        depthChart[Position.WR].Should().HaveCount(1);
+
+        player.Position.Should().Be(Position.QB);
     }
 
     [Fact]

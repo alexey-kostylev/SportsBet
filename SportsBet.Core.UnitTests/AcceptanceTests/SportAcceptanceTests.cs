@@ -10,9 +10,6 @@ namespace SportsBet.Core.UnitTests.AcceptanceTests;
 [Trait("Category", "Acceptance Tests")]
 public class SportAcceptanceTests
 {
-
-
-
     /*
         Adds a player to a depth chart for a given position (at a specific spot). If
         no position_depth is provided, then add them to the end of the depth chart
@@ -20,7 +17,7 @@ public class SportAcceptanceTests
         player entered gets priority and bumps the existing player down a depth spot.
      */
     [Fact]
-    public void ShouldAddPlayersAndGetFullDepthChartAndDisplayAPosityionUnderPlayer()
+    public void ShouldAddPlayersAndGetFullDepthChartAndDisplayAPositionUnderPlayer()
     {
         var bob = new Player(1, "Bob");
         var alice = new Player(2, "Alice");
@@ -30,6 +27,7 @@ public class SportAcceptanceTests
             [Position.WR, Position.KR]
             );
         sport.AddPlayerToDepthChart(bob, Position.WR, 0);
+        // should bump bob to position 1
         sport.AddPlayerToDepthChart(alice, Position.WR, 0);
         sport.AddPlayerToDepthChart(charlie, Position.WR, 2);
         sport.AddPlayerToDepthChart(bob, Position.KR);
@@ -62,12 +60,6 @@ public class SportAcceptanceTests
             .Should().BeEquivalentTo([1, 3]);
     }
 
-    /*
-        Adds a player to a depth chart for a given position (at a specific spot). If
-        no position_depth is provided, then add them to the end of the depth chart
-        for that position. If you are entering two players into the same slot, the last
-        player entered gets priority and bumps the existing player down a depth spot.
-     */
     [Theory]
     [MemberData(nameof(GetTestDataForAddingPlayers))]
     public void Case1_ShouldAddPlayers(

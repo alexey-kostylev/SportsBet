@@ -11,8 +11,20 @@ namespace SportsBet.Core;
 /// </summary>
 /// <param name="Id">The unique identifier for the player.</param>
 /// <param name="Name">The display name of the player.</param>
+/// <param name="Position">The position of the player. Can be null if not assigned.</param>
 public record Player(int Id, string Name)
 {
+    public Position? Position { get; private set; }
+
+    /// <summary>
+    /// Sets the primary position of the player if it is not already set.
+    /// </summary>
+    /// <param name="position"></param>
+    public void SetPrimaryPositionIfNotSet(Position position)
+    {
+        Position ??= position;
+    }
+
     public override int GetHashCode()
     {
         return HashCode.Combine(Id);

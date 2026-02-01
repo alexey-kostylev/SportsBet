@@ -49,6 +49,9 @@ public record Sport(string name, HashSet<Position> SupportedPositions)
             return;
         }
 
+        // set player's primary position if not already set
+        player.SetPrimaryPositionIfNotSet(position);
+
         if (position_depth == null)
         {
             players.Add(player);
