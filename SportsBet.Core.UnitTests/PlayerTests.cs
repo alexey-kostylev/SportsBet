@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SportsBet.Core.UnitTests;
+
+[Trait("Category", "Unit")]
 public class PlayerTests
 {
     [Fact]
