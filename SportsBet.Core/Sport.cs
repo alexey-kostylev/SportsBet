@@ -14,7 +14,7 @@ namespace SportsBet.Core;
 /// supported positions defines which positions are valid for player assignment within this sport.</remarks>
 /// <param name="name">The name of the sport.</param>
 /// <param name="SupportedPositions">A set of positions that are valid for this sport.</param>
-public record Sport(string name, HashSet<Position> SupportedPositions)
+public class Sport(string name, HashSet<Position> SupportedPositions)
 {
     private readonly Dictionary<Position, IList<Player>> _positionSlots = [];
 
@@ -32,6 +32,8 @@ public record Sport(string name, HashSet<Position> SupportedPositions)
     /// <exception cref="ArgumentException">Thrown if the specified position is not supported.</exception>
     public void AddPlayerToDepthChart(Player player, Position position, int? position_depth = null)
     {
+        ArgumentNullException.ThrowIfNull(player);
+
         if (SupportedPositions.Contains(position) == false)
         {
             throw new ArgumentException($"Position {position} is not supported in '{name}'.");
@@ -48,9 +50,6 @@ public record Sport(string name, HashSet<Position> SupportedPositions)
         {
             return;
         }
-
-        // set player's primary position if not already set
-        player.SetPrimaryPositionIfNotSet(position);
 
         if (position_depth == null)
         {
@@ -69,6 +68,8 @@ public record Sport(string name, HashSet<Position> SupportedPositions)
     /// <exception cref="InvalidOperationException">Thrown if the specified position does not exist in the depth chart.</exception>
     public void RemovePlayerFromDepthChart(Player player, Position position)
     {
+        ArgumentNullException.ThrowIfNull(player);
+
         if (!_positionSlots.TryGetValue(position, out var players))
         {
             throw new InvalidOperationException($"Player '{player.Name}' does not exist in position '{position}'.");
@@ -101,6 +102,8 @@ public record Sport(string name, HashSet<Position> SupportedPositions)
     /// <exception cref="ArgumentException">Thrown if the specified position does not exist in the depth chart.</exception>
     public IReadOnlyCollection<Player> GetPlayersUnderPlayerInDepthChart(Player player, Position position)
     {
+        ArgumentNullException.ThrowIfNull(player);
+
         if (!_positionSlots.TryGetValue(position, out var players))
         {
             throw new ArgumentException($"Position {position} does not exist in '{name}'.");

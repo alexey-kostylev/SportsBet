@@ -20,7 +20,7 @@ public record Player(int Id, string Name)
     /// Sets the primary position of the player if it is not already set.
     /// </summary>
     /// <param name="position"></param>
-    public void SetPrimaryPositionIfNotSet(Position position)
+    public void SetPrimaryPosition(Position position)
     {
         Position ??= position;
     }

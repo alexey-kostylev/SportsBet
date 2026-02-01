@@ -16,8 +16,6 @@ public class SportTests
         _sport.AddPlayerToDepthChart(player, Position.QB, 0);
 
         _sport.GetFullDepthChart()[Position.QB].Should().HaveCount(1);
-
-        player.Position.Should().Be(Position.QB);
     }
 
     [Fact]
@@ -27,11 +25,9 @@ public class SportTests
         _sport.AddPlayerToDepthChart(player, Position.QB, 0);
         _sport.AddPlayerToDepthChart(player, Position.WR);
 
-        var depthChart  = _sport.GetFullDepthChart();
+        var depthChart = _sport.GetFullDepthChart();
         depthChart[Position.QB].Should().HaveCount(1);
         depthChart[Position.WR].Should().HaveCount(1);
-
-        player.Position.Should().Be(Position.QB);
     }
 
     [Fact]
@@ -65,6 +61,14 @@ public class SportTests
     }
 
     [Fact]
+    public void AddPlayerToDepthChart_PlayerIsNull_ShouldThrow()
+    {
+        Action act = () => _sport.AddPlayerToDepthChart(null!, Position.KR, 0);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
+
+    [Fact]
     public void RemovePlayerFromDepthChart_ShouldRemovePlayer()
     {
         var player1 = new Player(1, "Player 1");
@@ -82,6 +86,18 @@ public class SportTests
         Action act = () => _sport.RemovePlayerFromDepthChart(new Player(100, "test"), Position.QB);
 
         act.Should().Throw<InvalidOperationException>().WithMessage("Player 'test' does not exist in position 'QB'.");
+
+        _sport.GetFullDepthChart()[Position.QB].Should().HaveCount(1);
+    }
+
+    [Fact]
+    public void RemovePlayerFromDepthChart_PlayerIsNull_ShouldThrowException()
+    {
+        _sport.AddPlayerToDepthChart(new Player(1, "Player 1"), Position.QB, 0);
+
+        Action act = () => _sport.RemovePlayerFromDepthChart(null!, Position.QB);
+
+        act.Should().Throw<ArgumentNullException>();
 
         _sport.GetFullDepthChart()[Position.QB].Should().HaveCount(1);
     }
@@ -126,5 +142,16 @@ public class SportTests
         playersUnderPlayer
             .Select(p => p.Id)
             .Should().BeEquivalentTo(expectedIds);
+    }
+
+    [Fact]
+    public void GetPlayersUnderPlayerInDepthChart_PlayerIsNull_ShouldThrowException()
+    {
+        Action act = () => _sport.GetPlayersUnderPlayerInDepthChart(
+            null!,
+            Position.QB
+        );
+
+        act.Should().Throw<ArgumentNullException>();
     }
 }

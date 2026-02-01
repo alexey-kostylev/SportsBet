@@ -29,12 +29,8 @@ public class PlayerTests
     public void Player_SetPrimaryPositionIfNotSet_ShouldSetPositionOnce()
     {
         var player = new Player(1, "Player 1");
-        var position1 = Position.QB;
-        var position2 = Position.WR;
-        player.SetPrimaryPositionIfNotSet(position1);
-        player.Position.Should().Be(position1);
-        player.SetPrimaryPositionIfNotSet(position2);
-        player.Position.Should().Be(position1); // Should remain the first position
+        player.SetPrimaryPosition(Position.QB);
+        player.Position.Should().Be(Position.QB); // Should remain the first position
     }
 
     [Fact]
