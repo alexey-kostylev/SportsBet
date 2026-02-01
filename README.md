@@ -36,5 +36,9 @@ You can also run tests from the Test Explorer in Visual Studio for a more intera
 
 ## Project Structure
 
-- `SportsBet.Core` — Domain model types (e.g., `Player`, `Sport`, `Position`, `PositionExtension`).
-- `SportsBet.Core.UnitTests` — Tests that exercise and validate the core model behavior.
+- `SportsBet.Core` — Domain model types (e.g., `Player`, `Sport`, `Position`, `PositionExtension`). The logic required is located in the Sport class and tested in UnitTests mostly by providing various inputs.
+- `SportsBet.Core.UnitTests` — Tests that exercise and validate the core model behavior. Tests are written using xUnit and consist of 2 main groups:
+  - Unit Tests: Focus on individual components and their behavior.
+  - Acceptance Tests: Validate end-to-end scenarios and business rules.
+
+
