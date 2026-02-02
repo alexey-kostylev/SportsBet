@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace SportsBet.Core;
 
 /// <summary>
-/// Specifies player positions for baseball and football, including both offensive and defensive roles.
+/// Specifies player positions for baseball.
 /// </summary>
 /// <remarks>This enumeration includes positions commonly used in baseball (such as Starting Pitcher, Catcher, and
-/// Shortstop) and American football (such as Quarterback, Wide Receiver, and Kicker). Use these values to represent or
+/// Shortstop). Use these values to represent or
 /// filter player roles in sports-related applications. The set of positions may not be exhaustive for all leagues or
 /// formats. The reason of using a class is to support extensibility for future new sports</remarks>
 public partial struct Position
@@ -62,43 +62,4 @@ public partial struct Position
     ///// Designated Hitter
     ///// </summary>
     public static readonly Position DH = new("dh"); // Designated Hitter
-    /// <summary>
-    /// Quarterback
-    /// </summary>
-    public static readonly Position QB = new("qb"); // Quarterback
-
-    ///// <summary>
-    ///// wide receiver
-    ///// </summary>
-    public static readonly Position WR = new("wr"); // Wide Receiver
-
-    ///// <summary>
-    ///// running back
-    ///// </summary>
-    public static readonly Position RB = new("rb"); // Running Back
-
-    ///// <summary>
-    ///// tight end
-    ///// </summary>
-    public static readonly Position TE = new("te"); // Tight End
-
-    ///// <summary>
-    ///// kicker
-    ///// </summary>
-    public static readonly Position K = new("k"); // Kicker
-
-    ///// <summary>
-    ///// punter
-    ///// </summary>
-    public static readonly Position P = new("p"); // Punter
-
-    ///// <summary>
-    ///// kicker returner
-    ///// </summary>
-    public static readonly Position KR = new("kr"); // Kicker Returner
-
-    ///// <summary>
-    ///// punt returner
-    ///// </summary>
-    public static readonly Position PR = new("pr"); // Punt Returner
 }
